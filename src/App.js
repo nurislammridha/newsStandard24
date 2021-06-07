@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from "react";
+import "./assets/css/main.css";
+import Home from "./Home";
+import Page from "./Page";
+import "./App.css";
+import News from "./assets/images/news.png";
+import midRight from "./assets/images/midRight.png";
+import MainPage from "./modules/mainPage/views/MainPage";
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MainPage />
+      {/* <Home /> */}
+      {/* <Page /> */}
+      {/* <div style={{ width: "400px" }}>
+        <div className="row">
+          <div className="col-sm-1"></div>
+          <div className="col-sm-9">
+            <ul>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+              <li>বাংলাদেশ</li>
+            </ul>
+          </div>
+          <div className="col-sm-2">
+            <i className="fa fa-facebook"></i>
+          </div>
+        </div>
+      </div> */}
+    </>
   );
-}
+};
 
 export default App;
