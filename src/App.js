@@ -1,54 +1,32 @@
 import React from "react";
-import "./assets/css/main.css";
-import Home from "./Home";
-import Page from "./Page";
-import "./App.css";
-import News from "./assets/images/news.png";
-import midRight from "./assets/images/midRight.png";
-import MainPage from "./modules/mainPage/views/MainPage";
+// import "./assets/css/main.css";
+//Route
+
+import { BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import AdminRoutes from "./admin/routes/AdminRoutes";
+//compo
+import Hello from "./website/Hello";
+import LoginContainer from "./admin/modules/login/views/LoginContainer";
 const App = () => {
   return (
     <>
-      <MainPage />
-      {/* <Home /> */}
-      {/* <Page /> */}
-      {/* <div style={{ width: "400px" }}>
-        <div className="row">
-          <div className="col-sm-1"></div>
-          <div className="col-sm-9">
-            <ul>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-              <li>বাংলাদেশ</li>
-            </ul>
-          </div>
-          <div className="col-sm-2">
-            <i className="fa fa-facebook"></i>
-          </div>
-        </div>
-      </div> */}
+      <Router>
+        <Switch>
+          <Route exact path="/web">
+            <Hello />
+          </Route>
+          <Route exact path="/admin/login">
+            <LoginContainer />
+          </Route>
+          <Route path="/admin">
+            <AdminRoutes />
+          </Route>
+          <Route exact path="/">
+            <Hello />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 };
