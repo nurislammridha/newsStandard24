@@ -1,7 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import HeaderCategory from "../components/HeaderCategory";
 
 const ListCategory = () => {
+  const history = useHistory();
   return (
     <>
       <div className="">
@@ -19,10 +21,13 @@ const ListCategory = () => {
               <th scope="row">1</th>
               <td>Bangladesh</td>
               <td>
-                <a className="btn btn-outline-success btn-sm">
+                {/* <a className="btn btn-outline-success btn-sm">
                   <i className="fa fa-eye"></i>
-                </a>
-                <a className="btn btn-outline-primary btn-sm ml-2">
+                </a> */}
+                <a
+                  className="btn btn-outline-primary btn-sm ml-2"
+                  onClick={() => history.push("/admin/edit_category/123")}
+                >
                   <i className="fa fa-pencil"></i>
                 </a>
                 <a className="btn btn-outline-danger btn-sm ml-2">

@@ -1,6 +1,6 @@
 import React from "react";
 
-const PasswordChangeWritter = () => {
+const ChangePassword = () => {
   return (
     <>
       <h6 className="text-muted">Change Admin Password</h6>
@@ -42,4 +42,4 @@ const PasswordChangeWritter = () => {
   );
 };
 
-export default PasswordChangeWritter;
+export default ChangePassword;

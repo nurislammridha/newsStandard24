@@ -11,17 +11,42 @@ import "../assets/css/admin.css";
 import Main from "../modules/main/components/Main";
 import BodyContainer from "../modules/main/views/BodyContainer";
 import CategoryContainer from "../modules/category/views/CategoryContainer";
+import AddCategoryContainer from "../modules/category/views/AddCategoryContainer";
+import EditCategoryContainer from "../modules/category/views/EditCategoryContainer";
+import ChangePasswordContainer from "../modules/admin/views/ChanegePasswordContainer";
+import WritterContainer from "../modules/writter/views/WritterContainer";
+import AddWritterContainer from "../modules/writter/views/AddWritterContainer";
+import EditWritterContainer from "../modules/writter/views/EditWritterContainer";
+import PasswordChangeWritterContainer from "../modules/writter/views/PasswordChangeWritterContainer";
 const AdminRoutes = (props) => {
   return (
     <>
       <Router>
         <Main>
           <Switch>
-            {/* <Route path={`${path}/page1`} render>
-            <Page1 />
-          </Route>*/}
             <Route path="/admin/category">
               <CategoryContainer />
+            </Route>
+            <Route path="/admin/add_category">
+              <AddCategoryContainer />
+            </Route>
+            <Route path="/admin/edit_category/:id">
+              <EditCategoryContainer />
+            </Route>
+            <Route path="/admin/change_password">
+              <ChangePasswordContainer />
+            </Route>
+            <Route path="/admin/writter">
+              <WritterContainer />
+            </Route>
+            <Route path="/admin/add_writter">
+              <AddWritterContainer />
+            </Route>
+            <Route path="/admin/edit_writter/:id">
+              <EditWritterContainer />
+            </Route>
+            <Route path="/admin/writter_password_change">
+              <PasswordChangeWritterContainer />
             </Route>
             <Route path="/admin">
               <BodyContainer />

@@ -11,19 +11,19 @@ const Sidebar = () => {
       <div className="list-group list-group-flush sidebar-pointer">
         <a
           className="list-group-item list-group-item-action list-group-item-light p-3"
-          href="#!"
+          onClick={() => history.push("/admin")}
         >
           Dashboard
         </a>
         <a
           className="list-group-item list-group-item-action list-group-item-light p-3"
-          href="#!"
+          onClick={() => history.push("/admin/change_password")}
         >
           Admin
         </a>
         <a
           className="list-group-item list-group-item-action list-group-item-light p-3"
-          href="#!"
+          onClick={() => history.push("/admin/writter")}
         >
           Writter
         </a>
