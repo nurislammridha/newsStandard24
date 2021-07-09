@@ -35,7 +35,7 @@ const Sidebar = () => {
         </a>
         <a
           className="list-group-item list-group-item-action list-group-item-light p-3"
-          href="#!"
+          onClick={() => history.push("/admin/news")}
         >
           News
         </a>

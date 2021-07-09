@@ -18,6 +18,9 @@ import WritterContainer from "../modules/writter/views/WritterContainer";
 import AddWritterContainer from "../modules/writter/views/AddWritterContainer";
 import EditWritterContainer from "../modules/writter/views/EditWritterContainer";
 import PasswordChangeWritterContainer from "../modules/writter/views/PasswordChangeWritterContainer";
+import NewsContainer from "../modules/news/views/NewsContainer";
+import AddNewsContainer from "../modules/news/views/AddNewsContainer";
+import EditNewsContainer from "../modules/news/views/EditNewsContainer";
 const AdminRoutes = (props) => {
   return (
     <>
@@ -47,6 +50,15 @@ const AdminRoutes = (props) => {
             </Route>
             <Route path="/admin/writter_password_change">
               <PasswordChangeWritterContainer />
+            </Route>
+            <Route path="/admin/news">
+              <NewsContainer />
+            </Route>
+            <Route path="/admin/add_news">
+              <AddNewsContainer />
+            </Route>
+            <Route path="/admin/edit_news/:id">
+              <EditNewsContainer />
             </Route>
             <Route path="/admin">
               <BodyContainer />
