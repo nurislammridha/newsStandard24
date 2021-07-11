@@ -101,6 +101,7 @@ const AddNews = () => {
             editorClassName="editor"
             toolbarClassName="toolbar"
             name="productFullDescription"
+            // editorState={"productInput.productFullDescription"}
             // editorState={productInput.productFullDescription}
             // onEditorStateChange={(e) =>
             //   handleChangeInput("productFullDescription", e)

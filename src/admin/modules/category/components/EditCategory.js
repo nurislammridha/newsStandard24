@@ -28,13 +28,13 @@ const EditCategory = () => {
   };
   useEffect(() => {
     if (isCategoryUpdate) {
-      history.pushState("/admin/category");
+      history.push("/admin/category");
       dispatch(FalseCategoryUpdate());
     }
   }, [isCategoryUpdate]);
   return (
     <>
-      <h4 className="text-muted">Update Category</h4>
+      <h6 className="text-muted">Update Category</h6>
       <div className="row mt-3">
         <div className="col-sm-5">
           <div className="row">

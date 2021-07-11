@@ -37,3 +37,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.rdw-editor-main {
+  border: 1px solid #ddd !important;
+  padding: 10px !important;
+  min-height: 300px !important;
+}
