@@ -3,8 +3,7 @@ import Select from "react-select";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useDispatch, useSelector } from "react-redux";
-import { GetNewsInput } from "../_redux/newsAction/NewsAction";
-import { SubmitCategoryInput } from "../../category/_redux/categoryAction/CategoryAction";
+import { GetNewsInput, SubmitNewsInput } from "../_redux/newsAction/NewsAction";
 
 const AddNews = () => {
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ const AddNews = () => {
     dispatch(GetNewsInput(name, value));
   };
   const handleSubmit = (data) => {
-    dispatch(SubmitCategoryInput(data));
+    dispatch(SubmitNewsInput(data));
   };
   const options = [
     { label: "test", value: "test" },

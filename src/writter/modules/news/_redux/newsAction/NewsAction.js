@@ -129,7 +129,8 @@ export const UpdateNewsInput = (data, id) => (dispatch) => {
   dispatch({ type: Types.IS_LOAD_NEWS, payload: true });
   try {
     Axios.put(url, data)
-      .then(async (res) => {
+      .then((res) => {
+        console.log(`res`, res);
         if (res.data.status) {
           const urlThumb = `${process.env.REACT_APP_BAZAR}newsImg/thumbnail/${res.data._id}`;
           const urlFeature = `${process.env.REACT_APP_BAZAR}newsImg/feature/${res.data._id}`;

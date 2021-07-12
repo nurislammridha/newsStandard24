@@ -66,7 +66,7 @@ const NewsReducer = (state = initialState, action) => {
         ...state,
         newsList: action.payload,
       };
-    case Types.SET_NEWS_DATA:
+    case Types.SET_CATEGORY_DATA:
       let newsUpdate = action.payload;
       return {
         ...state,
