@@ -1,8 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const HeaderNews = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const handleCreate = () => {
+    history.push("/admin/add_news");
+    dispatch(EmptyNewsField());
+  };
   return (
     <>
       <div className="row">

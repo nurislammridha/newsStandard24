@@ -48,7 +48,7 @@ const ListCategory = () => {
       dispatch(GetCategoryList());
       dispatch(FalseCategoryDeleted());
     }
-  }, []);
+  }, [isCategoryDeleted]);
   return (
     <>
       <div className="">
