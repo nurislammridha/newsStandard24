@@ -1,8 +1,37 @@
-import React from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Card } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import logo from "../../../assets/images/headerIcon.png";
-import Select from "react-select";
+import {
+  FalseIsLoggedIn,
+  GetLoginInput,
+  SubmitLoginInput,
+} from "../_redux/loginAction/LoginAction";
 const Login = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const loginInput = useSelector((state) => state.loginInfo.loginInput);
+  const isButtonLoader = useSelector((state) => state.loginInfo.isButtonLoader);
+  const isLoggedIn = useSelector((state) => state.loginInfo.isLoggedIn);
+  const handleChangeInput = (name, value) => {
+    dispatch(GetLoginInput(name, value));
+  };
+  const handleSubmit = (data) => {
+    dispatch(SubmitLoginInput(data));
+  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/admin");
+      dispatch(FalseIsLoggedIn());
+    }
+  }, [isLoggedIn]);
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") || "false";
+    if (isLoggedIn === "true") {
+      history.push("/admin");
+    }
+  }, []);
   return (
     <>
       <div className="login-body">
@@ -12,36 +41,67 @@ const Login = () => {
               <Card.Text>
                 <div className="row">
                   <div className="col-sm-6">
-                    <h2 className="text-center text-muted">Login</h2>
-                    <select className="form-control mb-2">
-                      <option>Select Your Role</option>
-                      <option>Admin</option>
-                      <option>Writter</option>
-                    </select>
-                    <div className="input-group mb-2">
+                    <h2 className="text-center text-muted">Admin Login</h2>
+
+                    <div className="input-group mb-2 mt-5">
                       <div className="input-group-prepend">
-                        <div className="input-group-text">@</div>
+                        <div className="input-group-text">
+                          <i className="fa fa-envelope-o" />
+                        </div>
                       </div>
                       <input
                         type="text"
                         className="form-control"
                         id="inlineFormInputGroup"
-                        placeholder="Username"
+                        placeholder="Enter Email"
+                        name="email"
+                        value={loginInput.email}
+                        onChange={(e) =>
+                          handleChangeInput("email", e.target.value)
+                        }
                       />
                     </div>
                     <div className="input-group mb-2">
                       <div className="input-group-prepend">
-                        <div className="input-group-text">@</div>
+                        <div className="input-group-text">
+                          <i className="fa fa-lock" />
+                        </div>
                       </div>
                       <input
-                        type="text"
+                        type="password"
                         className="form-control"
                         id="inlineFormInputGroup"
-                        placeholder="Username"
+                        placeholder="Enter Password"
+                        name="password"
+                        value={loginInput.password}
+                        onChange={(e) =>
+                          handleChangeInput("password", e.target.value)
+                        }
+                        onKeyPress={(event) => {
+                          if (event.key === "Enter") {
+                            handleSubmit(loginInput);
+                          }
+                        }}
                       />
                     </div>
                     <div>
-                      <a className="btn btn-secondary float-right">Submit</a>
+                      {!isButtonLoader && (
+                        <a
+                          className="btn btn-secondary float-right mb-3"
+                          onClick={() => handleSubmit(loginInput)}
+                        >
+                          Login
+                        </a>
+                      )}
+                      {isButtonLoader && (
+                        <a className="btn btn-secondary float-right mb-3">
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        </a>
+                      )}
                     </div>
                   </div>
                   <div className="col-sm-6">

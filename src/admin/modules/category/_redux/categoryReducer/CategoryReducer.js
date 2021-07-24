@@ -54,7 +54,8 @@ const CategoryReducer = (state = initialState, action) => {
         categoryList: action.payload,
       };
     case Types.SET_CATEGORY_DATA:
-      let categoryUpdate = action.payload;
+      let categoryUpdate = { ...state.categoryInput };
+      categoryUpdate.categoryName = action.payload.categoryName;
       return {
         ...state,
         categoryInput: categoryUpdate,

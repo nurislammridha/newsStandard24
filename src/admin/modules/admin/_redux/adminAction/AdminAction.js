@@ -29,18 +29,21 @@ export const SubmitPasswordInput = (data) => (dispatch) => {
   } else if (data.confirmPassword.length < 6) {
     showToast("error", "Confirm Password should be at least 6 charecter");
     return 0;
-  } else if (data.oldPassword !== data.confirmPassword) {
-    showToast("error", "Password not matched");
+  } else if (data.newPassword !== data.confirmPassword) {
+    showToast("error", "Password not matched2");
     return 0;
   }
-
-  const url = `${process.env.REACT_APP_BAZAR}admin/password_change`;
+  const email = localStorage.getItem("email");
+  data.email = email;
+  const url = `${process.env.REACT_APP_NEWS}admin/change_password`;
   dispatch({ type: Types.IS_LOAD_BUTTON, payload: true });
   try {
     axios
-      .put(url, data)
+      .post(url, data)
       .then((res) => {
+        console.log(`res`, res);
         if (res.data.status) {
+          showToast("success", res.data.message);
           dispatch({ type: Types.IS_LOAD_BUTTON, payload: false });
           dispatch({ type: Types.IS_PASSWORD_CHANNGED, payload: true });
         } else {

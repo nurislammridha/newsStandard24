@@ -3,6 +3,7 @@ import AdminReducer from "../../admin/modules/admin/_redux/adminReducer/AdminRed
 import CategoryReducer from "../../admin/modules/category/_redux/categoryReducer/CategoryReducer";
 import WritterReducer from "../../admin/modules/writter/_redux/writterReducer/WritterReducer";
 import NewsReducer from "../../admin/modules/news/_redux/newsReducer/NewsReducer";
+import LoginReducer from "../../admin/modules/login/_redux/loginReducer/LoginReducer";
 
 // combine all of the reducers here
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   writterInfo: WritterReducer,
   adminInfo: AdminReducer,
   newsInfo: NewsReducer,
+  loginInfo: LoginReducer,
 });
 
 export default rootReducer;

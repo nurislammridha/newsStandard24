@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetPasswordInput,
@@ -8,12 +8,22 @@ import {
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const adminInput = useSelector((state) => state.adminInfo.adminInput);
+  const isPasswordChanged = useSelector(
+    (state) => state.adminInfo.isPasswordChanged
+  );
   const handleChangeInput = (name, value) => {
     dispatch(GetPasswordInput(name, value));
   };
   const handleSubmit = (data) => {
     dispatch(SubmitPasswordInput(data));
   };
+  useEffect(() => {
+    if (isPasswordChanged) {
+      localStorage.setItem("email", "");
+      localStorage.setItem("isLoggedIn", false);
+      window.location = "/admin/login";
+    }
+  }, [isPasswordChanged]);
   return (
     <>
       <h6 className="text-muted">Change Admin Password</h6>

@@ -49,7 +49,7 @@ export const SubmitWritterInput = (data) => (dispatch) => {
   } else if (data.confirmPassword.length < 6) {
     showToast("error", "Confirm Password should be at least 6 character");
     return 0;
-  } else if (data.password !== data.password) {
+  } else if (data.password !== data.confirmPassword) {
     showToast("error", "Password and confirm password not matched");
     return 0;
   } else if (data.division.length === 0) {
@@ -72,6 +72,7 @@ export const SubmitWritterInput = (data) => (dispatch) => {
         if (res.data.status) {
           dispatch({ type: Types.IS_BUTTON_LOADER, payload: false });
           dispatch({ type: Types.IS_WRITTER_INSERTED, payload: true });
+          showToast("success", res.data.message);
         } else {
           showToast("error", res.data.message);
         }
@@ -112,28 +113,13 @@ export const UpdateWritterInput = (data, id) => (dispatch) => {
   ) {
     showToast("error", "Invalid Email");
     return 0;
-  } else if (data.password.length === 0) {
-    showToast("error", "Password should n`t be empty");
-    return 0;
-  } else if (data.password.length < 6) {
-    showToast("error", "Password should be at least 6 character");
-    return 0;
-  } else if (data.confirmPassword.length === 0) {
-    showToast("error", "Confirm password should n`t be empty");
-    return 0;
-  } else if (data.confirmPassword.length < 6) {
-    showToast("error", "Confirm Password should be at least 6 character");
-    return 0;
-  } else if (data.password !== data.password) {
-    showToast("error", "Password and confirm password not matched");
-    return 0;
   } else if (data.division.length === 0) {
     showToast("error", "Please select division");
     return 0;
   } else if (data.district.length === 0) {
     showToast("error", "Please select district");
     return 0;
-  } else if (data.address.length === 0) {
+  } else if (data && data.address.length === 0) {
     showToast("error", "Address should n`t be empty");
     return 0;
   }
@@ -172,9 +158,9 @@ export const GetWritterList = () => (dispatch) => {
   const url = `${process.env.REACT_APP_NEWS}writter`;
   dispatch({ type: Types.IS_WRITTER_LOADER, payload: true });
   axios.get(url).then((res) => {
-    if (res.data.staus) {
+    if (res.data.status) {
       dispatch({ type: Types.IS_WRITTER_LOADER, payload: false });
-      dispatch({ type: Types.WRITTER_LIST, payload: res.data.writter });
+      dispatch({ type: Types.WRITTER_LIST, payload: res.data.result });
     }
   });
 };
@@ -185,8 +171,9 @@ export const WritterDelete = (id) => (dispatch) => {
   const url = `${process.env.REACT_APP_NEWS}writter/${id}`;
   try {
     axios.delete(url).then((res) => {
-      if (res.data.staus) {
+      if (res.data.status) {
         dispatch({ type: Types.IS_WRITTER_DELETED, payload: true });
+        showToast("success", res.data.message);
       }
     });
   } catch (error) {

@@ -42,7 +42,7 @@ const EditCategory = () => {
               <input
                 className="form-control"
                 name="categoryName"
-                value={categoryInput.categoryInput}
+                value={categoryInput.categoryName}
                 placeholder="Enter Category"
                 onChange={(e) =>
                   handleChangeInput("categoryName", e.target.value)

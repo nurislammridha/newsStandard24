@@ -6,6 +6,7 @@ const initialState = {
     confirmPassword: "",
   },
   isLoadButton: false,
+  isPasswordChanged: false,
 };
 const AdminReducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -23,6 +24,7 @@ const AdminReducer = (state = initialState, action) => {
       return {
         ...state,
         adminInput: initialState.adminInput,
+        isPasswordChanged: action.payload,
       };
     case Types.IS_LOAD_BUTTON:
       return {

@@ -48,7 +48,8 @@ const ListWritter = () => {
       dispatch(GetWritterList());
       dispatch(FalseWritterDeleted());
     }
-  }, []);
+  }, [isWritterDeleted]);
+  console.log(`writterList`, writterList);
   return (
     <>
       <div className="">
@@ -84,7 +85,7 @@ const ListWritter = () => {
                   <th scope="col">Division</th>
                   <th scope="col">District</th>
                   <th scope="col">Address</th>
-                  <th scope="col">Is Active</th>
+                  {/* <th scope="col">Is Active</th> */}
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -92,15 +93,15 @@ const ListWritter = () => {
                 {writterList.map((item, index) => (
                   <tr>
                     <th scope="row">{index + 1}</th>
-                    <td>{item.firstName + item.lastName}</td>
+                    <td>{item.firstName + " " + item.lastName}</td>
                     <td>{item.phoneNumber}</td>
                     <td>{item.email}</td>
                     <td>{item.division}</td>
                     <td>{item.district}</td>
                     <td>{item.address}</td>
-                    <td>
+                    {/* <td>
                       <a className="btn btn-primary btn-sm">ACTIVE</a>
-                    </td>
+                    </td> */}
                     <td>
                       {/* <a className="btn btn-outline-success btn-sm">
                   <i className="fa fa-eye"></i>

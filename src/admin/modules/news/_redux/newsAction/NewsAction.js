@@ -181,12 +181,12 @@ export const EmptyNewsField = () => (dispatch) => {
 };
 
 export const GetNewsList = () => (dispatch) => {
-  const url = `${process.env.REACT_APP_NEWS}category`;
+  const url = `${process.env.REACT_APP_NEWS}newsImg`;
   dispatch({ type: Types.IS_NEWS_LOADER, payload: true });
   axios.get(url).then((res) => {
-    if (res.data.staus) {
+    if (res.data.status) {
       dispatch({ type: Types.IS_NEWS_LOADER, payload: false });
-      dispatch({ type: Types.NEWS_LIST, payload: res.data.news });
+      dispatch({ type: Types.NEWS_LIST, payload: res.data.result });
     }
   });
 };

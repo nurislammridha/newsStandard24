@@ -35,7 +35,7 @@ const EditWritter = () => {
     }
   }, [isWritterUpdate]);
   const divisionOption = DivisionList();
-  const districtOption = DistrictListByDivision();
+  const districtOption = DistrictListByDivision(writterInput.division);
   return (
     <>
       <h6 className="text-muted">Update Writter</h6>
@@ -82,9 +82,10 @@ const EditWritter = () => {
             name="email"
             value={writterInput.email}
             onChange={(e) => handleChangeInput("email", e.target.value)}
+            disabled
           />
         </div>
-        <div className="col-sm-2 mt-2">Password:</div>
+        {/* <div className="col-sm-2 mt-2">Password:</div>
         <div className="col-sm-4 mt-2">
           <input
             className="form-control"
@@ -107,7 +108,7 @@ const EditWritter = () => {
               handleChangeInput("confirmPassword", e.target.value)
             }
           />
-        </div>
+        </div> */}
         <div className="col-sm-2 mt-2">Division:</div>
         <div className="col-sm-4 mt-2">
           <Select

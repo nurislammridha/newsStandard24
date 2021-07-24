@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   useHistory,
@@ -22,6 +22,13 @@ import NewsContainer from "../modules/news/views/NewsContainer";
 import AddNewsContainer from "../modules/news/views/AddNewsContainer";
 import EditNewsContainer from "../modules/news/views/EditNewsContainer";
 const AdminRoutes = (props) => {
+  const history = useHistory();
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") || "false";
+    if (isLoggedIn === "false") {
+      history.push("/admin/login");
+    }
+  }, []);
   return (
     <>
       <Router>

@@ -25,7 +25,8 @@ const AddWritter = () => {
   };
 
   const divisionOption = DivisionList();
-  const districtOption = DistrictListByDivision();
+  const districtOption = DistrictListByDivision(writterInput.division);
+  console.log(`isButtonLoader`, isButtonLoader);
   return (
     <>
       <h6 className="text-muted">Crate a writter</h6>
@@ -34,7 +35,7 @@ const AddWritter = () => {
         <div className="col-sm-4 mt-2">
           <input
             className="form-control"
-            placeholder="enter first name"
+            placeholder="Enter first name"
             type="text"
             name="firstName"
             value={writterInput.firstName}
@@ -45,7 +46,7 @@ const AddWritter = () => {
         <div className="col-sm-4 mt-2">
           <input
             className="form-control"
-            placeholder="enter last name"
+            placeholder="Enter last name"
             type="text"
             name="lastName"
             value={writterInput.lastName}
@@ -56,7 +57,7 @@ const AddWritter = () => {
         <div className="col-sm-4 mt-2">
           <input
             className="form-control"
-            placeholder="enter phone number"
+            placeholder="Enter phone number"
             type="text"
             name="phoneNumber"
             value={writterInput.phoneNumber}
@@ -67,7 +68,7 @@ const AddWritter = () => {
         <div className="col-sm-4 mt-2">
           <input
             className="form-control"
-            placeholder="enter email"
+            placeholder="Enter email"
             type="text"
             name="email"
             value={writterInput.email}
@@ -78,7 +79,7 @@ const AddWritter = () => {
         <div className="col-sm-4 mt-2">
           <input
             className="form-control"
-            placeholder="enter password"
+            placeholder="Enter password"
             type="password"
             name="password"
             value={writterInput.password}
@@ -89,7 +90,7 @@ const AddWritter = () => {
         <div className="col-sm-4 mt-2">
           <input
             className="form-control"
-            placeholder="enter confirm password"
+            placeholder="Enter confirm password"
             type="password"
             name="confirmPassword"
             value={writterInput.confirmPassword}
@@ -143,7 +144,6 @@ const AddWritter = () => {
                 role="status"
                 aria-hidden="true"
               ></span>
-              SUBMITTING
             </a>
           )}
         </div>

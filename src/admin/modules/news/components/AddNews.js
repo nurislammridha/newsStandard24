@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useDispatch, useSelector } from "react-redux";
-import { GetNewsInput } from "../_redux/newsAction/NewsAction";
-import { SubmitCategoryInput } from "../../category/_redux/categoryAction/CategoryAction";
+import { GetNewsInput, GetNewsList } from "../_redux/newsAction/NewsAction";
+import {
+  GetCategoryList,
+  SubmitCategoryInput,
+} from "../../category/_redux/categoryAction/CategoryAction";
+import { GetWritterList } from "../../writter/_redux/writterAction/WritterAction";
 
 const AddNews = () => {
   const dispatch = useDispatch();
   const newsInput = useSelector((state) => state.newsInfo.newsInput);
+  const categoryList = useSelector((state) => state.categoryInfo.categoryList);
+  const writterList = useSelector((state) => state.writterInfo.writterList);
+  const newsList = useSelector((state) => state.newsInfo.newsList);
   const isButtonLoader = useSelector((state) => state.newsInfo.isButtonLoader);
   const handleChangeInput = (name, value) => {
     dispatch(GetNewsInput(name, value));
@@ -20,6 +27,11 @@ const AddNews = () => {
     { label: "test", value: "test" },
     { label: "test2", value: "test2" },
   ];
+  useEffect(() => {
+    dispatch(GetCategoryList());
+    dispatch(GetWritterList());
+    dispatch(GetNewsList());
+  }, []);
   return (
     <>
       <h3 className="text-muted">Add a News</h3>

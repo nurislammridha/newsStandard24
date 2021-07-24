@@ -26,6 +26,7 @@ export const SubmitCategoryInput = (data) => (dispatch) => {
         if (res.data.status) {
           dispatch({ type: Types.IS_BUTTON_LOADER, payload: false });
           dispatch({ type: Types.IS_CATEGORY_INSERTED, payload: true });
+          showToast("success", res.data.message);
         } else {
           showToast("error", res.data.message);
         }
@@ -80,9 +81,9 @@ export const GetCategoryList = () => (dispatch) => {
   const url = `${process.env.REACT_APP_NEWS}category`;
   dispatch({ type: Types.IS_CATEGORY_LOADER, payload: true });
   axios.get(url).then((res) => {
-    if (res.data.staus) {
+    if (res.data.status) {
       dispatch({ type: Types.IS_CATEGORY_LOADER, payload: false });
-      dispatch({ type: Types.CATEGORY_LIST, payload: res.data.category });
+      dispatch({ type: Types.CATEGORY_LIST, payload: res.data.result });
     }
   });
 };
@@ -93,7 +94,7 @@ export const CategoryDelete = (id) => (dispatch) => {
   const url = `${process.env.REACT_APP_NEWS}category/${id}`;
   try {
     axios.delete(url).then((res) => {
-      if (res.data.staus) {
+      if (res.data.status) {
         dispatch({ type: Types.IS_CATEGORY_DELETED, payload: true });
       }
     });
