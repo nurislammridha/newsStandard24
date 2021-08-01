@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FalseNewsDeleted,
   GetNewsList,
+  ImageUrl,
   NewsDelete,
   SetNewsUpdate,
 } from "../_redux/newsAction/NewsAction";
@@ -22,16 +23,16 @@ const ListNews = () => {
   }, []);
   const handleEdit = (data) => {
     dispatch(SetNewsUpdate(data));
-    history.push(`/admin/edit_news/${data._id}`);
+    history.push(`/admin/edit_news/${data.newsId._id}`);
   };
-  const handleDelete = (id) => {
+  const handleDelete = (imgId, dataId) => {
     confirmAlert({
       title: "Confirm To Delete",
       message: `Are you sure to delete this news?`,
       buttons: [
         {
           label: "Yes",
-          onClick: () => dispatch(NewsDelete(id)),
+          onClick: () => dispatch(NewsDelete(imgId, dataId)),
         },
         {
           label: "No",
@@ -83,10 +84,16 @@ const ListNews = () => {
               {newsList.map((item, index) => (
                 <tr>
                   <th scope="row">{index + 1}</th>
-                  <td>{item.newsTitle}</td>
-                  <td>{item.categoryName}</td>
-                  <td>{item.writterName}</td>
-                  <td>{item.thumbnailImage}</td>
+                  <td>{item.newsId.newsTitle}</td>
+                  <td>{item.newsId.categoryName}</td>
+                  <td>{item.newsId.writterName}</td>
+                  <td>
+                    <img
+                      src={ImageUrl(item.thumbnailImg)}
+                      width="60"
+                      height="30"
+                    />
+                  </td>
                   <td>
                     <a className="btn btn-primary btn-sm">ACTIVE</a>
                   </td>
@@ -102,7 +109,7 @@ const ListNews = () => {
                     </a>
                     <a
                       className="btn btn-outline-danger btn-sm ml-2"
-                      onClick={() => handleDelete(item._id)}
+                      onClick={() => handleDelete(item._id, item.newsId._id)}
                     >
                       <i className="fa fa-trash"></i>
                     </a>

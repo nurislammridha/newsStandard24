@@ -5,10 +5,17 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  CategoryOption,
   FalseNewsUpdate,
   GetNewsInput,
+  GetNewsList,
+  ImageUrl,
+  NewsOption,
   UpdateNewsInput,
+  WritterOption,
 } from "../_redux/newsAction/NewsAction";
+import { GetCategoryList } from "../../category/_redux/categoryAction/CategoryAction";
+import { GetWritterList } from "../../writter/_redux/writterAction/WritterAction";
 const EditNews = () => {
   const { id } = useParams();
   const history = useHistory();
@@ -16,6 +23,13 @@ const EditNews = () => {
   const newsInput = useSelector((state) => state.newsInfo.newsInput);
   const isButtonLoader = useSelector((state) => state.newsInfo.isButtonLoader);
   const isNewsUpdate = useSelector((state) => state.newsInfo.isNewsUpdate);
+  const categoryList = CategoryOption(
+    useSelector((state) => state.categoryInfo.categoryList)
+  );
+  const writterList = WritterOption(
+    useSelector((state) => state.writterInfo.writterList)
+  );
+  const newsList = NewsOption(useSelector((state) => state.newsInfo.newsList));
   const handleChangeInput = (name, value) => {
     dispatch(GetNewsInput(name, value));
   };
@@ -24,7 +38,8 @@ const EditNews = () => {
   };
   useEffect(() => {
     if (isNewsUpdate) {
-      history.push("/admin/news");
+      console.log(`Yes`);
+      // history.push("/admin/news");
       dispatch(FalseNewsUpdate());
     }
   }, [isNewsUpdate]);
@@ -32,6 +47,13 @@ const EditNews = () => {
     { label: "test", value: "test" },
     { label: "test2", value: "test2" },
   ];
+  useEffect(() => {
+    dispatch(GetCategoryList());
+    dispatch(GetWritterList());
+    dispatch(GetNewsList());
+  }, []);
+
+  console.log(`isNewsUpdate`, isNewsUpdate);
   return (
     <>
       <h3 className="text-muted">Update News</h3>
@@ -49,7 +71,7 @@ const EditNews = () => {
         <div className="col-sm-2">Category</div>
         <div className="col-sm-4">
           <Select
-            options={options}
+            options={categoryList}
             name="categoryId"
             value={{ label: newsInput.categoryName }}
             onChange={(e) => {
@@ -61,7 +83,7 @@ const EditNews = () => {
         <div className="col-sm-2 mt-2">Writter</div>
         <div className="col-sm-4 mt-2">
           <Select
-            options={options}
+            options={writterList}
             name="writterId"
             value={{ label: newsInput.writterName }}
             onChange={(e) => {
@@ -75,7 +97,7 @@ const EditNews = () => {
           <Select
             isMulti
             name="reletedNews"
-            options={options}
+            options={newsList}
             value={newsInput.reletedNews}
             onChange={(e) => handleChangeInput("reletedNews", e)}
           />
@@ -143,16 +165,16 @@ const EditNews = () => {
         </div>
         <div className="col-sm-9"> </div>
         <div className="col-sm-2 mt-4">
-          {!isButtonLoader && (
-            <a
-              className="btn btn-outline-secondary"
-              onClick={() => handleSubmit(newsInput)}
-            >
-              Update
-            </a>
-          )}
+          {/* {!isButtonLoader && ( */}
+          <a
+            className="btn btn-outline-secondary"
+            onClick={() => handleSubmit(newsInput)}
+          >
+            Update
+          </a>
+          {/* )} */}
 
-          {isButtonLoader && (
+          {/* {isButtonLoader && (
             <a className="btn btn-outline-secondary">
               {" "}
               <span
@@ -162,7 +184,7 @@ const EditNews = () => {
               ></span>
               Updatting
             </a>
-          )}
+          )} */}
         </div>
       </div>
     </>

@@ -3,7 +3,14 @@ import Select from "react-select";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useDispatch, useSelector } from "react-redux";
-import { GetNewsInput, GetNewsList } from "../_redux/newsAction/NewsAction";
+import {
+  CategoryOption,
+  GetNewsInput,
+  GetNewsList,
+  NewsOption,
+  SubmitNewsInput,
+  WritterOption,
+} from "../_redux/newsAction/NewsAction";
 import {
   GetCategoryList,
   SubmitCategoryInput,
@@ -13,20 +20,22 @@ import { GetWritterList } from "../../writter/_redux/writterAction/WritterAction
 const AddNews = () => {
   const dispatch = useDispatch();
   const newsInput = useSelector((state) => state.newsInfo.newsInput);
-  const categoryList = useSelector((state) => state.categoryInfo.categoryList);
-  const writterList = useSelector((state) => state.writterInfo.writterList);
-  const newsList = useSelector((state) => state.newsInfo.newsList);
+  const categoryList = CategoryOption(
+    useSelector((state) => state.categoryInfo.categoryList)
+  );
+  const writterList = WritterOption(
+    useSelector((state) => state.writterInfo.writterList)
+  );
+  const newsList = NewsOption(useSelector((state) => state.newsInfo.newsList));
   const isButtonLoader = useSelector((state) => state.newsInfo.isButtonLoader);
-  const handleChangeInput = (name, value) => {
-    dispatch(GetNewsInput(name, value));
+  const isLoadNews = useSelector((state) => state.newsInfo.isLoadNews);
+  const handleChangeInput = (name, value, e) => {
+    dispatch(GetNewsInput(name, value, e));
   };
   const handleSubmit = (data) => {
-    dispatch(SubmitCategoryInput(data));
+    dispatch(SubmitNewsInput(data));
   };
-  const options = [
-    { label: "test", value: "test" },
-    { label: "test2", value: "test2" },
-  ];
+
   useEffect(() => {
     dispatch(GetCategoryList());
     dispatch(GetWritterList());
@@ -49,7 +58,7 @@ const AddNews = () => {
         <div className="col-sm-2">Category</div>
         <div className="col-sm-4">
           <Select
-            options={options}
+            options={categoryList}
             name="categoryId"
             value={{ label: newsInput.categoryName }}
             onChange={(e) => {
@@ -61,7 +70,7 @@ const AddNews = () => {
         <div className="col-sm-2 mt-2">Writter</div>
         <div className="col-sm-4 mt-2">
           <Select
-            options={options}
+            options={writterList}
             name="writterId"
             value={{ label: newsInput.writterName }}
             onChange={(e) => {
@@ -75,7 +84,7 @@ const AddNews = () => {
           <Select
             isMulti
             name="reletedNews"
-            options={options}
+            options={newsList}
             value={newsInput.reletedNews}
             onChange={(e) => handleChangeInput("reletedNews", e)}
           />
@@ -90,7 +99,7 @@ const AddNews = () => {
             id="file-upload"
             name="thumbnailImage"
             onChange={(e) =>
-              handleChangeInput("thumbnailImage", e.target.files[0])
+              handleChangeInput("thumbnailImage", e.target.files[0], e)
             }
           />
         </div>
@@ -112,17 +121,17 @@ const AddNews = () => {
             autoComplete="off"
             type="file"
             accept="image/*"
-            id="file-upload"
+            id="file-upload2"
             name="featureImage"
             onChange={(e) =>
-              handleChangeInput("featureImage", e.target.files[0])
+              handleChangeInput("featureImage", e.target.files[0], e)
             }
           />
         </div>
         <div className="col-sm-4 mt-2">
           Upload Image
           <label
-            for="file-upload"
+            for="file-upload2"
             className="btn btn-outline-warning ml-3 mr-3"
             style={{ fontSize: "15px" }}
           >
@@ -141,18 +150,18 @@ const AddNews = () => {
             onEditorStateChange={(e) => handleChangeInput("fullDescription", e)}
           />
         </div>
-        <div className="col-sm-9"> </div>
-        <div className="col-sm-2 mt-4">
-          {!isButtonLoader && (
-            <a
-              className="btn btn-outline-secondary"
-              onClick={() => handleSubmit(newsInput)}
-            >
-              Submit
-            </a>
-          )}
+        <div className="col-sm-2"> </div>
+        <div className="col-sm-1 mt-4">
+          {/* {!isLoadNews && ( */}
+          <a
+            className="btn btn-outline-secondary"
+            onClick={() => handleSubmit(newsInput)}
+          >
+            Submit
+          </a>
+          {/* )} */}
 
-          {isButtonLoader && (
+          {/* {isLoadNews && (
             <a className="btn btn-outline-secondary">
               {" "}
               <span
@@ -162,7 +171,7 @@ const AddNews = () => {
               ></span>
               Submitting
             </a>
-          )}
+          )} */}
         </div>
       </div>
     </>
