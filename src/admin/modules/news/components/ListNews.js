@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FalseNewsDeleted,
   GetNewsList,
+  GetNewsPublish,
   ImageUrl,
   NewsDelete,
   SetNewsUpdate,
@@ -46,6 +47,9 @@ const ListNews = () => {
       dispatch(FalseNewsDeleted());
     }
   }, [isNewsDeleted]);
+  const handlePublish = (id, tur) => {
+    dispatch(GetNewsPublish(id, tur));
+  };
   return (
     <>
       <div className="">
@@ -95,7 +99,14 @@ const ListNews = () => {
                     />
                   </td>
                   <td>
-                    <a className="btn btn-primary btn-sm">ACTIVE</a>
+                    <a
+                      className="btn btn-primary btn-sm"
+                      onClick={() =>
+                        handlePublish(item.newsId._id, item.newsId.isPublish)
+                      }
+                    >
+                      {item.newsId.isPublish ? "Unpublish" : "Publish"}
+                    </a>
                   </td>
                   <td>
                     <a className="btn btn-outline-success btn-sm">

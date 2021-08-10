@@ -16,7 +16,7 @@ const initialState = {
     thumbnailImagePreview: "",
     featureImage: "",
     featureImagePreview: "",
-    reletedNews: "",
+    reletedNews: [],
     isPublish: false,
   },
   isButtonLoader: false,

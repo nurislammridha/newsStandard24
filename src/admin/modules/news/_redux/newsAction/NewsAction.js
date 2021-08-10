@@ -237,6 +237,18 @@ export const NewsDelete = (imgId, dataId) => (dispatch) => {
 export const FalseNewsDeleted = (data) => (dispatch) => {
   dispatch({ type: Types.IS_NEWS_DELETED, payload: false });
 };
+export const GetNewsPublish = (id, tur) => (dispatch) => {
+  const postData = {
+    isPublish: !tur,
+  };
+  const url = `${process.env.REACT_APP_NEWS}news/${id}`;
+  axios.put(url, postData).then((res) => {
+    if (res.data.status) {
+      showToast("success", "News puplish successfully!");
+      dispatch({ type: Types.IS_NEWS_DELETED, payload: true });
+    }
+  });
+};
 
 export const CategoryOption = (data) => {
   const arr = [];

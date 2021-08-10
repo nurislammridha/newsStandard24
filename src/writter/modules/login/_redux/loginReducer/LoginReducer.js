@@ -1,63 +1,32 @@
 import * as Types from "../types/Types";
 const initialState = {
-  categoryInput: {
-    categoryName: "",
-    categoryImg: "",
-    imagePreviewUrl: "",
-    categoryID: "",
+  loginInput: {
+    email: "",
+    password: "",
   },
-  isLoadCategory: false,
-  categoryList: null,
-  isLoadCategoryList: false,
-  isCategoryDeleted: false,
-  isSuccessCategory: false,
+  isButtonLoader: false,
+  isLoggedIn: false,
 };
-const CategoryReducer = (state = initialState, action) => {
+const LoginReducer = (state = initialState, action) => {
   const newState = { ...state };
 
   switch (action.type) {
-    case Types.GET_CATEGORY_INPUT:
-      const categoryInput = { ...state.categoryInput };
-      categoryInput[action.payload.name] = action.payload.value;
+    case Types.GET_LOGIN_INPUT:
+      const loginInput = { ...state.loginInput };
+      loginInput[action.payload.name] = action.payload.value;
       return {
         ...state,
-        categoryInput: categoryInput,
+        loginInput: loginInput,
       };
-
-    case Types.IS_SUCCESS_CATEGORY:
+    case Types.IS_BUTTON_LOADER:
       return {
         ...state,
-        isSuccessCategory: action.payload,
-        categoryInput: initialState.categoryInput,
+        isButtonLoader: action.payload,
       };
-    case Types.IS_LOAD_CATEGORY:
+    case Types.IS_LOGGED_IN:
       return {
         ...state,
-        isLoadCategory: action.payload,
-      };
-    case Types.GET_CATEGORY_LIST:
-      return {
-        ...state,
-        categoryList: action.payload,
-      };
-    case Types.IS_LOAD_CATEGORY_LIST:
-      return {
-        ...state,
-        isLoadCategoryList: action.payload,
-      };
-    case Types.IS_CATEGORY_DELETED:
-      return {
-        ...state,
-        isCategoryDeleted: action.payload,
-      };
-    case Types.SET_CATEGORY_UPDATED:
-      const categorySetInput = { ...state.categoryInput };
-      categorySetInput.categoryName = action.payload.categoryName;
-      categorySetInput.imagePreviewUrl = action.payload.categoryImage;
-      categorySetInput.categoryID = action.payload.categoryID;
-      return {
-        ...state,
-        categoryInput: categorySetInput,
+        isLoggedIn: action.payload,
       };
 
     default:
@@ -65,4 +34,4 @@ const CategoryReducer = (state = initialState, action) => {
   }
   return newState;
 };
-export default CategoryReducer;
+export default LoginReducer;
