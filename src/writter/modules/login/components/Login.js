@@ -34,6 +34,7 @@ const Login = () => {
       history.push("/admin");
     }
   }, []);
+  //res
   return (
     <>
       <div className="login-body">
